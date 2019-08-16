@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React, { Component } from 'react';
 
 import { Calendar, momentLocalizer } from 'react-big-calendar';
@@ -45,6 +46,27 @@ export default class Main extends Component {
         });
     }
 
+    handleSelectDate({ start }) {
+        const choosedDate = moment(start).format('DD/MM/YY');
+
+        confirmAlert({
+            title: `Deseja adicionar o dia ${choosedDate} como um dia com os objetivos finalizados?`,
+            buttons: [
+                {
+                    label: 'Sim',
+                    onClick: () => {
+                        eventsHandler.createAnEvent(start);
+                    },
+                },
+                {
+                    label: 'Não',
+                    onClick: () => {},
+                },
+            ],
+        });
+    }
+
+    // @TODO refatorar essa logica, utilizando o estado... Estudo de como fazer
     renderEventsOnScreen() {
         this.setState({
             events: eventsHandler.getAllEvents(),
@@ -56,18 +78,15 @@ export default class Main extends Component {
         return (
             <Container>
                 <Header>
-                    <Title>
-                        Objetivos{' '}
-                        <span role="img" aria-labelledby="notes">
-                            📝
-                        </span>
-                    </Title>
+                    <Title>Objetivos 📝</Title>
                 </Header>
 
                 <Calendar
+                    selectable
                     localizer={localizer}
                     defaultDate={new Date()}
                     defaultView="month"
+                    onSelectSlot={this.handleSelectDate}
                     toolbar={false}
                     views={{ month: true }}
                     events={events}

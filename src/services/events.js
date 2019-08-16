@@ -1,15 +1,16 @@
 import moment from 'moment';
+import _ from 'underscore';
 
 class EventsHandler {
     constructor() {
         this.today = new Date();
     }
 
-    createAnEvent() {
+    createAnEvent(day) {
         // create event
         const event = {
-            start: this.today,
-            end: this.today,
+            start: day || this.today,
+            end: day || this.today,
             title: 'DONE ⭐',
         };
 
@@ -23,6 +24,7 @@ class EventsHandler {
         }
     }
 
+    // @TODO refatorar essa logica, utilizando o estado... Estudo de como fazer
     getAllEvents() {
         return this.getEventsFromStorage() ? this.getEventsFromStorage() : [];
     }
@@ -34,8 +36,11 @@ class EventsHandler {
             return false;
         }
 
-        const lastEvent = events[events.length - 1];
-        return moment(this.today).isSame(moment(lastEvent.start), 'day');
+        const isOccurredEventToday = _.find(events, event => {
+            moment(this.today).isSame(moment(event.start), 'day');
+        });
+
+        return isOccurredEventToday !== null;
     }
 
     getEventsFromStorage() {

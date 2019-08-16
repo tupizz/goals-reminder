@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
 
-class App extends Component {
-    state = {};
+import Routes from './Routes';
+import GlobalStyle from './styles/global';
 
-    render() {
-        return (
-            <div className="App">
-                <div className="App-header" />
-            </div>
-        );
-    }
+export default function App() {
+    return (
+        <>
+            <GlobalStyle />
+            <Routes />
+        </>
+    );
 }
-
-export default App;

@@ -11,15 +11,21 @@ export default createGlobalStyle`
        min-height: 100%;
    }
     body {
-        background-color: #282c34;
+       @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+       font-family: 'Lato', sans-serif;
+       background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(90,92,106,1) 0%, rgba(32,45,58,1) 81.3% );
        -webkit-font-smoothing: antialiased !important;
    }
     body, input, button {
        color: #222;
        font-size: 14px;
-       font-family: Arial, Helvetica, sans-serif;
    }
     button {
        cursor: pointer;
    }
+
+   div.react-confirm-alert-overlay {
+        background-image: radial-gradient( circle farthest-corner at 10% 20%, rgba(128,248,174,0.2) 0%, rgba(223,244,148,0.8) 90% );
+    }
+
 `;

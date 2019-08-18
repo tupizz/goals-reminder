@@ -6,6 +6,7 @@
     "electron-is-dev": "^1.1.0",
     "moment": "^2.24.0",
     "prettier": "^1.18.2",
+    "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-big-calendar": "^0.22.0",
     "react-confirm-alert": "^2.4.1",

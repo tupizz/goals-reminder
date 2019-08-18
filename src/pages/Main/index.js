@@ -7,6 +7,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import CustomConfirmAlert from '../../components/CustomConfirmAlert';
 
 import { Container, Title, Header } from './styles';
 import eventsHandler from '../../services/events';
@@ -19,15 +20,37 @@ export default class Main extends Component {
     };
 
     componentDidMount() {
+        this.renderEventsOnScreen();
+
         const cantShowPopup = eventsHandler.alreadyOccurredEvent();
 
         if (cantShowPopup) {
-            this.renderEventsOnScreen();
             return;
         }
 
+        const today = moment(new Date()).format('DD/MM/YY');
+
         confirmAlert({
+            closeOnEscape: false,
+            closeOnClickOutside: false,
+            customUI: ({ onClose }) => {
+                return (
+                    <CustomConfirmAlert
+                        onClose={onClose}
+                        choosedDate={today}
+                        fnConfirm={() => {
+                            eventsHandler.createAnEvent();
+                            this.renderEventsOnScreen();
+                        }}
+                    />
+                );
+            },
+        });
+
+        /** confirmAlert({
             title: 'Objetivos realizados?',
+            closeOnEscape: false,
+            closeOnClickOutside: false,
             buttons: [
                 {
                     label: 'Sim',
@@ -43,28 +66,29 @@ export default class Main extends Component {
                     },
                 },
             ],
-        });
+        }); */
     }
 
-    handleSelectDate({ start }) {
+    handleSelectDate = ({ start }) => {
         const choosedDate = moment(start).format('DD/MM/YY');
 
         confirmAlert({
-            title: `Deseja adicionar o dia ${choosedDate} como um dia com os objetivos finalizados?`,
-            buttons: [
-                {
-                    label: 'Sim',
-                    onClick: () => {
-                        eventsHandler.createAnEvent(start);
-                    },
-                },
-                {
-                    label: 'Não',
-                    onClick: () => {},
-                },
-            ],
+            closeOnEscape: false,
+            closeOnClickOutside: false,
+            customUI: ({ onClose }) => {
+                return (
+                    <CustomConfirmAlert
+                        onClose={onClose}
+                        choosedDate={choosedDate}
+                        fnConfirm={() => {
+                            eventsHandler.createAnEvent(start);
+                            this.renderEventsOnScreen();
+                        }}
+                    />
+                );
+            },
         });
-    }
+    };
 
     // @TODO refatorar essa logica, utilizando o estado... Estudo de como fazer
     renderEventsOnScreen() {

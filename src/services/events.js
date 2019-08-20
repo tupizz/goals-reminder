@@ -40,7 +40,7 @@ class EventsHandler {
             moment(this.today).isSame(moment(event.start), 'day');
         });
 
-        return isOccurredEventToday !== null;
+        return isOccurredEventToday && isOccurredEventToday !== null;
     }
 
     getEventsFromStorage() {

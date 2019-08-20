@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+   @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
    * {
        margin: 0;
        padding: 0;
@@ -11,7 +12,6 @@ export default createGlobalStyle`
        min-height: 100%;
    }
     body {
-       @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
        font-family: 'Lato', sans-serif;
        background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(90,92,106,1) 0%, rgba(32,45,58,1) 81.3% );
        -webkit-font-smoothing: antialiased !important;

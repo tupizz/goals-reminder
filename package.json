@@ -71,7 +71,7 @@
     "devDependencies": {
         "babel-eslint": "^10.0.2",
         "concurrently": "^4.1.1",
-        "electron": "^6.0.2",
+        "electron": "^18.3.7",
         "electron-builder": "^21.2.0",
         "eslint": "^6.1.0",
         "eslint-config-airbnb": "^18.0.1",
